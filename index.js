@@ -17,8 +17,7 @@ const options = {
 function downloadFiles(files) {
   files.map(file => {
     console.log(`Downloading ${file.filename}...`);
-    // TODO: The downloaded file ends up being "Not Found"
-    fetch(`https://api.gathercontent.com/files/${file.id}/download'`, options)
+    fetch(`https://api.gathercontent.com/files/${file.id}/download`, options)
       .then(res => {
         const writeStream = fs.createWriteStream(file.filename);
         res.body.pipe(writeStream);
