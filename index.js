@@ -16,9 +16,10 @@ const options = {
 
 function downloadFiles(files) {
   files.map(file => {
-    fetch(file.url)
+    console.log(`Downloading ${file.filename}...`);
+    // TODO: The downloaded file ends up being "Not Found"
+    fetch(`https://api.gathercontent.com/files/${file.id}/download'`, options)
       .then(res => {
-        console.log(`Downloading ${file.filename}...`);
         const writeStream = fs.createWriteStream(file.filename);
         res.body.pipe(writeStream);
       });
@@ -29,5 +30,6 @@ fetch(`https://api.gathercontent.com/items/${ITEM_ID}/files`, options)
     .then(function(res) {
         return res.json();
     }).then(function(json) {
+        console.log(json)
         downloadFiles(json.data);
     }).catch(err => console.log)
