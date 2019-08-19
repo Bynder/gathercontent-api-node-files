@@ -16,7 +16,6 @@ const options = {
 
 function downloadFiles(files) {
   files.map(file => {
-    console.log(`Downloading ${file.filename}...`);
     fetch(`https://api.gathercontent.com/files/${file.id}/download`, options)
       .then(res => {
         const writeStream = fs.createWriteStream(file.filename);
@@ -29,6 +28,5 @@ fetch(`https://api.gathercontent.com/items/${ITEM_ID}/files`, options)
     .then(function(res) {
         return res.json();
     }).then(function(json) {
-        console.log(json)
         downloadFiles(json.data);
     }).catch(err => console.log)
