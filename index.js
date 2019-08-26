@@ -16,9 +16,8 @@ const options = {
 
 function downloadFiles(files) {
   files.map(file => {
-    fetch(file.url)
+    fetch(`https://api.gathercontent.com/files/${file.id}/download`, options)
       .then(res => {
-        console.log(`Downloading ${file.filename}...`);
         const writeStream = fs.createWriteStream(file.filename);
         res.body.pipe(writeStream);
       });
